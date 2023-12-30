@@ -1,18 +1,12 @@
 - name: Set ohmyzsh path as a variable
   set_fact:
     omz_path: "{{ ansible_env.HOME }}/.oh-my-zsh"
-  tags:
-    - zsh
 
 - name: Check if ohmyzsh is already installed
   stat:
     path: "{{ omz_path }}"
   register: omz_stat
-  tags:
-    - zsh
 
 - name: Install ohmyzsh
   shell: sh -c "$(curl -L https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   when: not omz_stat.stat.exists
-  tags:
-    - zsh
