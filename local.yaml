@@ -1,0 +1,13 @@
+- hosts: localhost
+  tasks:
+    - name: Include macOS specific tasks
+      include_tasks: macos/mac.yaml
+      when: ansible_os_family == "Darwin"
+
+    - name: Include linux specific tasks
+      include_tasks: debian/debian.yaml
+      when: ansible_os_family == "Debian"
+
+    - name: Include Windows specific tasks
+      include_tasks: windows/windows.yaml
+      when: ansible_os_family == "Windows"

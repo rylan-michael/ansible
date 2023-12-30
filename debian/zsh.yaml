@@ -1,0 +1,30 @@
+- name: Install zsh
+  become: true
+  apt: name=zsh
+
+# Change shell so that when I start a new terminal it's starting with zsh
+- name: Change shell
+  become: true
+  shell: chsh -s $(which zsh) rylan_michael
+
+- name: Set default shell for new zsh-users
+  become: true
+  shell: useradd -D -s $(which zsh)
+
+- name: Set ohmyzsh path as a variable
+  set_fact:
+    omz_path: "{{ ansible_env.HOME }}/.oh-my-zsh"
+
+- name: Check if ohmyzsh is already installed
+  stat:
+    path: "{{ omz_path }}"
+  register: omz_stat
+
+- name: Install ohmyzsh
+  shell: sh -c "$(curl -L https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  when: not omz_stat.stat.exists
+
+- name: Install the zsh plugin autosuggestions
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    dest: "{{ omz_path }}/custom/plugins/zsh-autosuggestions"

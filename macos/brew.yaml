@@ -1,0 +1,89 @@
+- name: Update homebrew
+  community.general.homebrew:
+    update_homebrew: true
+
+- name: Install homebrew casks
+  community.general.homebrew_cask:
+    state: present
+    accept_external_apps: true
+    name:
+      # Utilities
+      - alt-tab
+      - hot
+      - iterm2
+      - little-snitch
+      - rectangle
+      - raycast
+      - 1password
+
+      # Programs
+      - anki
+      - calibre
+      - firefox
+      - google-chrome
+      - jellyfin
+      - microsoft-edge
+      - obsidian
+      - postman
+      - spotify
+      - vlc
+      - zotero
+      - qbittorrent
+
+      # Development
+      - docker
+      - db-browser-for-sqlite
+      - dotnet-sdk
+      - linear-linear
+      - oracle-jdk
+      - visual-studio-code
+
+      # Security research
+      - mullvadvpn
+      - metasploit
+      - owasp-zap
+      - wireshark
+  tags:
+    - casks
+
+- name: Install homebrew formula
+  community.general.homebrew:
+    state: present
+    name:
+      - ansible
+      - atuin
+      - autoconf
+      - coreutils
+      - dnsmasq
+      - protobuf
+
+      # Dotfiles management GNU/stow
+      - stow
+
+      # Useful binaries
+      - tree
+      - pandoc
+      - ngrep
+      - ripgrep
+      - jq
+      - tmux
+      - yt-dlp
+
+      # Development utilities
+      # Python package management
+      - poetry
+      - neovim
+      - cmake
+      - go
+      - httpie
+
+      # Infrastructure utilities
+      - azure-cli
+      - caddy
+      - tailscale
+      - terraform
+
+      # Security research
+      - nmap
+  tags:
+    - formula

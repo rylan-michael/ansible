@@ -1,0 +1,19 @@
+- name: Update cache
+  become: true
+  apt:
+    force_apt_get: true
+    update_cache: true
+    state: present
+  tags:
+    - install
+    - core
+
+- name: Configure zsh
+  import_tasks: zsh.yaml
+  tags:
+    - zsh
+
+- name: Install node
+  import_tasks: node.yaml
+  tags: 
+    - node

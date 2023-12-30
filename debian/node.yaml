@@ -1,0 +1,14 @@
+- name: Install node
+  become: true
+  apt:
+    name:
+      - nodejs
+      - npm
+
+- name: Install "n" node.js package globally
+  community.general.npm:
+    name: n
+    global: true
+
+- name: Install node LTS
+  shell: n lts

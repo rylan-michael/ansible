@@ -1,0 +1,9 @@
+- name: Configure zsh
+  import_tasks: zsh.yaml
+  tags:
+    - zsh
+
+- name: Install Homebrew packages
+  import_tasks: brew.yaml
+  tags:
+    - brew
