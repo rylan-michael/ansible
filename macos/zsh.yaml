@@ -10,3 +10,13 @@
 - name: Install ohmyzsh
   shell: sh -c "$(curl -L https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   when: not omz_stat.stat.exists
+
+- name: Install the zsh plugin autosuggestions
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    dest: "{{ omz_path }}/custom/plugins/zsh-autosuggestions"
+  
+- name: Install the zsh plugin zsh-vi-mode
+  ansible.builtin.git:
+    repo: "https://github.com/jeffreytse/zsh-vi-mode"
+    dest: "{{ omz_path }}/custom/plugins/zsh-vi-mode"
