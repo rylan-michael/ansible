@@ -67,6 +67,8 @@
       - stow
 
       # Useful binaries
+      - fzf
+      - fd
       - tree
       - pandoc
       - ngrep
@@ -76,8 +78,7 @@
       - yt-dlp
 
       # Development utilities
-      # Python package management
-      - poetry
+      - poetry # Python package management
       - neovim
       - cmake
       - go
