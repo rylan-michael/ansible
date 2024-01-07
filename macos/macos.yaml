@@ -7,3 +7,8 @@
   import_tasks: brew.yaml
   tags:
     - brew
+
+- name: Configure golang environment
+  import_tasks: golang.yaml
+  tags:
+    - golang

@@ -1,0 +1,31 @@
+- name: Create a temporary directory
+  tempfile:
+    state: directory
+  register: temp_dir
+
+- name: Clone Delve repository to temporary directory
+  git:
+    repo: "https://github.com/go-delve/delve"
+    dest: "{{ temp_dir.path }}"
+  register: git_clone
+
+- name: Install Delve for Go version 1.16 or later
+  shell: "go install github.com/go-delve/delve/cmd/dlv@latest"
+  args:
+    chdir: "{{ temp_dir.path }}"
+  when: git_clone.changed
+
+- name: Get GOPATH using go command
+  command: go env GOPATH
+  register: go_env_gopath
+
+- name: Verify Delve installation
+  command: "{{ go_env_gopath.stdout }}/bin/dlv version"
+  register: dlv_check
+  when: go_env_gopath.stdout != ''
+
+- name: Display Delve version
+  debug:
+    msg: "Delve installed successfully: {{ dlv_check.stdout }}"
+  when: dlv_check.rc == 0
+
