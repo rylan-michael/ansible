@@ -21,6 +21,7 @@
       - rectangle
       - raycast
       - 1password
+      - hammerspoon
 
       # Programs
       - anki
